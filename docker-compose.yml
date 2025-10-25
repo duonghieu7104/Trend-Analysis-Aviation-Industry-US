@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  jupyter:
+    image: jupyter/pyspark-notebook
+    container_name: spark-jupyter-v3
+    ports:
+      - "8888:8888"
+    environment:
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+    volumes:
+      - ./data:/home/jovyan/data
+      - ./src:/home/jovyan/src
+      - ./model:/home/jovyan/model
+      - ./notebook:/home/jovyan/notebook
+    networks:
+      - trending_news
+
+networks:
+  trending_news:
+    driver: bridge
